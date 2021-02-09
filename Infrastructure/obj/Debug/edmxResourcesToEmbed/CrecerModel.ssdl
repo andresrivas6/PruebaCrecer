@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pruebaCrecerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="beneficiario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="idUsuario" Type="int" />
+    <Property Name="fecha_nacimiento" Type="datetime" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="fecha_nacimiento" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__beneficia__idUsu__267ABA7A">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="beneficiario" Type="Self.beneficiario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="beneficiario">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="pruebaCrecerModelStoreContainer">
+    <EntitySet Name="beneficiario" EntityType="Self.beneficiario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__beneficia__idUsu__267ABA7A" Association="Self.FK__beneficia__idUsu__267ABA7A">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="beneficiario" EntitySet="beneficiario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
